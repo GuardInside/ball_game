@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace ball_game
 {
@@ -27,13 +28,25 @@ namespace ball_game
 
     //! Строковое представление игры
     //!
-    //! Возвращает строку вида "0 1 5", где каждому числу
+    //! @note Используется для отладки
+    //! @sa step()
+    std::string string_view(game_info *game_info);
+
+    //! Проверка хода
+    //!
+    //! @retrun true Eсли ход может быть совершен
+    bool is_correct_step(game_info *game_info, const std::vector<int> &ball_colors);
+
+    //! Сделать ход
+    //!
+    //! Вовзращает пару чисел, где первое указывает -- количество верно указанных цветов,
+    //! а второе -- количество верно указанных позиций цветов
+    //!
+    //! @arg step Строка вида "0 1 2", где каждому числу
     //! соответствует цвет, а позиция числа соответствует
     //! позиции шара в наборе
-    //!
-    //! @note Используется для отладки
-    std::string string_view(game_info * game_info);
+    std::pair<int, int> step(game_info *game_info, const std::vector<int> &ball_colors);
 
     //! Закрыть игру
-    void exit(game_info * game_info);
+    void exit(game_info *game_info);
 }
